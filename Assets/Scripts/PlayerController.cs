@@ -6,6 +6,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     [Tooltip("Player speed")]
     private float moveSpeed = 12f;
+    [SerializeField]
+    [Tooltip("Multiplier to apply on moving if player is in air")]
+    private float speedInAirMultiplier = 0.55f;
 
     [Header("Jump")]
     [SerializeField]
@@ -48,9 +51,6 @@ public class PlayerController : MonoBehaviour
     // Called every fixed time frame
     private void FixedUpdate()
     {
-        // Check if grounded
-        IsGrounded = Physics.CheckSphere(feet.position, 0.1f);
-
         // Handle jump
         Jump();
 
@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
             if (IsGrounded)
             {
                 // Add up force
-                IsGrounded = false;
+                //IsGrounded = false;
                 playerRb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
             }
         }
@@ -101,9 +101,10 @@ public class PlayerController : MonoBehaviour
         // Get current and target velocity
         Vector3 currentVelocity = playerRb.linearVelocity;
         Vector3 targetVelocity = new Vector3(move.x, 0f, move.y);
-
+        
         // Multiply target velocity by speed
-        targetVelocity *= moveSpeed;
+        // if player is in air, multiply speed by multiplier
+        targetVelocity *= IsGrounded? moveSpeed:moveSpeed*speedInAirMultiplier;
 
         // Transform target velocity to world space
         targetVelocity = transform.TransformDirection(targetVelocity);
@@ -115,4 +116,10 @@ public class PlayerController : MonoBehaviour
         //Vector3.ClampMagnitude(velocityChange, maxForce);
         playerRb.AddForce(velocityChange, ForceMode.VelocityChange);
     }
+
+    /// <summary>
+    /// Set Is Grounded property
+    /// </summary>
+    /// <param name="grounded"></param>
+    public void SetGrounded(bool grounded) => IsGrounded = grounded;
 }
