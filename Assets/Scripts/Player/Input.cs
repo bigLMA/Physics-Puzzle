@@ -6,6 +6,8 @@ public class Input : MonoBehaviour
     private InputAction moveAction;
     private InputAction lookAction;
     private InputAction jumpAction;
+    private InputAction throwAction;
+    private InputAction rotateGrabbedAction;
 
     private void Start()
     {
@@ -13,6 +15,8 @@ public class Input : MonoBehaviour
         moveAction = InputSystem.actions.FindAction("Move");
         lookAction = InputSystem.actions.FindAction("Look");
         jumpAction = InputSystem.actions.FindAction("Jump");
+        throwAction = InputSystem.actions.FindAction("Throw");
+        rotateGrabbedAction = InputSystem.actions.FindAction("Rotate Grabbed Object");
     }
 
     /// <summary>
@@ -40,5 +44,33 @@ public class Input : MonoBehaviour
     public bool GetJump()
     {
         return jumpAction.IsPressed();
+    }
+
+    /// <summary>
+    /// Return if interact button (LMB) is pressed down
+    /// </summary>
+    /// <returns>Boolean representing that interact button is pressed</returns>
+    public bool GetInteractDown()
+    {
+        return UnityEngine.Input.GetButtonDown("Fire1");
+    }
+
+    /// <summary>
+    /// Return if interact button (LMB) is pressed up
+    /// </summary>
+    /// <returns>Boolean representing that interact button is pressed up</returns>
+    public bool GetInteractUp()
+    {
+        return UnityEngine.Input.GetButtonUp("Fire1");
+    }
+
+    public bool GetThrow()
+    {
+        return throwAction.IsPressed();
+    }
+
+    public Vector2 GetRotateGrabbed()
+    {
+        return rotateGrabbedAction.ReadValue<Vector2>();
     }
 }
