@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GrabbedObject : MonoBehaviour, IInteractible
+public class GrabbedObject : MonoBehaviour, IInteractible, IDisplayable
 {
     public void Interact(PlayerController player)
     {
@@ -10,15 +10,7 @@ public class GrabbedObject : MonoBehaviour, IInteractible
         }
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public string Name() => "Interact cube";
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string Description() => "Grab";
 }

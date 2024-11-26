@@ -57,6 +57,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRb;
     private Vector3 velocity;
 
+    public delegate void OnDisplayebleLook(IDisplayable target);
+    public event OnDisplayebleLook DisplaybleLook;
+
     /// <summary>
     /// If player is on ground or in air
     /// </summary>
@@ -78,6 +81,8 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         HandleInteraction();
+
+        LookForDisplayable();
     }
 
     // Called every fixed time frame
@@ -291,5 +296,38 @@ public class PlayerController : MonoBehaviour
 
         // set Grabbed Object to null
         GrabbedObject = null;
+    }
+
+    /// <summary>
+    /// Try to detect displayble object, and display it
+    /// </summary>
+    private void LookForDisplayable()
+    {
+        if (GrabbedObject != null)
+        {
+            DisplaybleLook(null);
+            return;
+        }
+
+        // Look for a displayble object
+        RaycastHit hit;
+        Ray ray = new Ray(cam.transform.position, cam.transform.forward);
+        if (Physics.Raycast(ray, out hit, interactRange))
+        {
+            IDisplayable displayable = hit.collider.GetComponent<MonoBehaviour>() as IDisplayable;
+
+            if(displayable != null)
+            {
+                DisplaybleLook(displayable);
+            }
+            else
+            {
+                DisplaybleLook(null);
+            }
+        }
+        else
+        {
+            DisplaybleLook(null);
+        }
     }
 }
