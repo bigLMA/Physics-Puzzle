@@ -9,5 +9,8 @@ using System.Threading.Tasks;
 /// </summary>
 public interface IInteractTarget
 {
+    /// <summary>
+    /// Called when player interacts with other object that will interact with Interact target
+    /// </summary>
     public void OnInteract();
 }
