@@ -7,6 +7,8 @@ public class FeetComponent : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.layer == 3) return;
+
         if (other.gameObject == player) return;
 
         player.SetGrounded(true);
@@ -14,6 +16,8 @@ public class FeetComponent : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if (other.gameObject.layer == 3) return;
+
         if (other.gameObject == player) return;
 
         player.SetGrounded(false);
@@ -21,6 +25,8 @@ public class FeetComponent : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        if (other.gameObject.layer == 3) return;
+
         if (other.gameObject == player) return;
 
         player.SetGrounded(true);
