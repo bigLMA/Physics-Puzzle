@@ -205,7 +205,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   interactRange: 1.9
-  throwStrength: 25
+  throwStrength: 45
   grabbedObjectRotation: 15
   grabLayer:
     serializedVersion: 2

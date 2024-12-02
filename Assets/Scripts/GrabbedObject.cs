@@ -10,7 +10,7 @@ public class GrabbedObject : MonoBehaviour, IInteractible, IDisplayable
         }
     }
 
-    public string Name() => "Interact cube";
+    public string Name() => $"Cube, mass: {GetComponent<Rigidbody>()?.mass}";
 
     public string Description() => "Grab";
 }

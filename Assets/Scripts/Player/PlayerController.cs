@@ -256,8 +256,9 @@ public class PlayerController : MonoBehaviour
         // Get rigidbody of grabbed object
         var grabbedRb = GrabbedObject.GetComponent<Rigidbody>();
 
-        // Disable is kinematic property
+        // Disable is kinematic property and enable gravity
         grabbedRb.isKinematic = false;
+        grabbedRb.useGravity = true;
 
         // Detach Grabbed object
         GrabbedObject.transform.parent = null;
@@ -283,8 +284,9 @@ public class PlayerController : MonoBehaviour
         // Get rigidbody of grabbed object
         var grabbedRb = this.GrabbedObject.GetComponent<Rigidbody>();
 
-        // Disable is kinematic property
+        // Disable is kinematic property and enable gravity
         grabbedRb.isKinematic = false;
+        grabbedRb.useGravity = true;
 
         // Detach Grabbed object
         this.GrabbedObject.transform.parent = null;
