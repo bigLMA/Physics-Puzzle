@@ -22,10 +22,14 @@ public class ShatteredWall : MonoBehaviour
 
         if (proj == null) return;
 
+        // if projectile breaks walls
         if (proj.BreaksWalls)
         {
+            // If projectile speed is enough
             if (collision.impulse.sqrMagnitude < shatterImpulse * shatterImpulse) return;
 
+            // Destroy projectile and wall
+            // Spawn shattered wall
             Vector3 contactPos = collision.GetContact(0).point;
             Destroy(gameObject);
             Destroy(collision.gameObject);

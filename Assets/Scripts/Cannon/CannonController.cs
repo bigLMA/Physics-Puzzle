@@ -38,6 +38,7 @@ public class CannonController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // TODO INPUT
         if(UnityEngine.Input.GetMouseButtonDown(0))
         {
             Shoot();
@@ -47,9 +48,12 @@ public class CannonController : MonoBehaviour
         transform.Rotate(Vector3.up, hor * Time.deltaTime * turnSensibility);
 
         float ver = UnityEngine.Input.GetAxis("Vertical");
+
+        // Rotate barrel
         barrel.Rotate(Vector3.right, ver * Time.deltaTime * turnSensibility * -1);
         Vector3 angle = barrel.localEulerAngles;
 
+        // Adapt from -180-180 angles to 0-360
         if (angle.x > 180f)
         {
             angle.x -= 360f;
@@ -59,6 +63,7 @@ public class CannonController : MonoBehaviour
             angle.x += 360f;
         }
 
+        // Clamp barrel rotation
         barrel.localEulerAngles = new Vector3(Mathf.Clamp(angle.x,  barrelMinAngle, barrelMaxAngle), 0f);
 
         if (UnityEngine.Input.GetMouseButtonDown(1))
@@ -78,6 +83,8 @@ public class CannonController : MonoBehaviour
 
     public void RemoveControl()
     {
+        // Disable this script and cannon camera
+        // Activate player game object
         this.enabled = false;
         PlayerRef.SetActive(true);
         cannonCamera.SetActive(false);
@@ -88,17 +95,22 @@ public class CannonController : MonoBehaviour
     {
         if(shoots) return;
 
+        // Start animation
         shoots = true;
         animator.SetBool("Shoots", true);
 
+        // Create projectile
         var projectile = Instantiate(projectilePrefabs[currentProjectileIndex], projectileSpawnPoint.position, Quaternion.identity);
 
+        // Launch projectile
         var projectileRb = projectile.GetComponent<Rigidbody>();
         projectileRb.linearVelocity = projectileSpawnPoint.forward * projectileSpeed;
     }
 
     public void StopShoot()
     {
+        // Reset shoots
+        // stop shoot animation
         shoots = false;
         animator.SetBool("Shoots", false);
     }

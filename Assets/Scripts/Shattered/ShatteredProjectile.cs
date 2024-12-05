@@ -32,12 +32,15 @@ public class ShatteredProjectile : MonoBehaviour
 
         if (collision.gameObject.name == "Player") return;
 
+        // If projectile speed is enough
         if(collision.impulse.sqrMagnitude < breakImpulse * breakImpulse) return;
 
+        // Create shattered version of projectile and destroy exising
         var shattered = Instantiate(shatteredProjectilePrefab, transform.position, transform.rotation);
         Destroy(gameObject);
 
         // Save existing velocity to the parts of the projectile
+        // to preserve
         foreach(Transform t in shattered.transform)
         {
             var rb = t.GetComponent<Rigidbody>();
