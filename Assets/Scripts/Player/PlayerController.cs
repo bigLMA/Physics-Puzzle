@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour
             Ray ray = new Ray(cam.transform.position, cam.transform.forward);
             if (Physics.Raycast( ray, out hit, interactRange))
             {
-                IInteractible interactible = hit.collider.GetComponent<MonoBehaviour>() as IInteractible;
+                IInteractible interactible = hit.collider.GetComponent<IInteractible>();
 
                 // Check if object is interactible
                 if (interactible != null && interactible.CanInteract(this))
@@ -316,9 +316,9 @@ public class PlayerController : MonoBehaviour
         Ray ray = new Ray(cam.transform.position, cam.transform.forward);
         if (Physics.Raycast(ray, out hit, interactRange))
         {
-            IDisplayable displayable = hit.collider.GetComponent<MonoBehaviour>() as IDisplayable;
+            IDisplayable displayable = hit.collider.GetComponent<IDisplayable>();
 
-            if(displayable != null)
+            if (displayable != null)
             {
                 DisplaybleLook(displayable);
             }
