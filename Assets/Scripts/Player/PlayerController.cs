@@ -275,8 +275,21 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void Throw()
     {
-        // Can't throw nothing
-        if (GrabbedObject == null) return;
+        // Check if has grabbed object
+        if (GrabbedObject == null)
+        {
+            var throwComponent = GetComponent<ThrowProjectileInventory>();
+
+            // If has throw component
+            if(throwComponent != null)
+            {
+                if (!throwComponent.HasProjectile) return;
+
+                throwComponent.ThrowProjectile();
+            }
+
+            return;
+        }
 
         // Re-enable collision between player and Grabbed object
         Physics.IgnoreCollision(GetComponent<Collider>(), this.GrabbedObject.GetComponent<Collider>(), false);
