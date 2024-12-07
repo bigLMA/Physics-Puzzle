@@ -126,6 +126,7 @@ GameObject:
   - component: {fileID: 267174487248500422}
   - component: {fileID: 5070001267371009207}
   - component: {fileID: 4826974195723423147}
+  - component: {fileID: 3191834626833643034}
   m_Layer: 0
   m_Name: FullCannon
   m_TagString: Untagged
@@ -164,7 +165,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cannonCamera: {fileID: 1436995625086546174}
-  hud: {fileID: 0}
+  playerHud: {fileID: 0}
+  cannonHud: {fileID: 0}
 --- !u!114 &5070001267371009207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,14 +179,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5023805533cb8594eacff38f7853d710, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cannonCamera: {fileID: 1436995625086546174}
   barrel: {fileID: 7150674410615421604}
-  hud: {fileID: 0}
+  UI: {fileID: 0}
   projectileSpawnPoint: {fileID: 4847993985543237372}
   projectilePrefabs:
   - {fileID: 9007195963241078381, guid: 5ebad07fd474e3d48a968d7f43dae178, type: 3}
   - {fileID: 6490825962970260088, guid: 8cff862f3d12c0f40ad492e8527c03b7, type: 3}
-  projectileSpeed: 80
+  projectileSpeed: 45
   turnSensibility: 8.5
   barrelMaxAngle: 13
   barrelMinAngle: -5.5
@@ -209,6 +210,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.1938803, y: 2.1931171, z: 3.3486485}
   m_Center: {x: -0.00000049670535, y: 1.0869006, z: 0.17231931}
+--- !u!95 &3191834626833643034
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4322682422392795693}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d40a1e9ad3810734989b3c84577bb305, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4643216098244626581
 GameObject:
   m_ObjectHideFlags: 0

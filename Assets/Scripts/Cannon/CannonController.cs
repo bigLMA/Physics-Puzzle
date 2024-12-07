@@ -4,11 +4,9 @@ public class CannonController : MonoBehaviour
 {
     [Header("Controlling")]
     [SerializeField]
-    private GameObject cannonCamera;
-    [SerializeField]
     private Transform barrel;
     [SerializeField]
-    private GameObject hud;
+    private MainUI UI;
 
     [Header("Shooting")]
     [SerializeField]
@@ -27,8 +25,10 @@ public class CannonController : MonoBehaviour
 
     private Animator animator;
     private int currentProjectileIndex = 0;
-    public GameObject PlayerRef { get; set; }
     private bool shoots = false;
+
+    public delegate void OnInteract(bool interact);
+    public event OnInteract OnInteractHandler;
 
     private void Start()
     {
@@ -44,13 +44,15 @@ public class CannonController : MonoBehaviour
             Shoot();
         }
 
+        // Rotate Barrel
         float hor = UnityEngine.Input.GetAxis("Horizontal");
         transform.Rotate(Vector3.up, hor * Time.deltaTime * turnSensibility);
 
+        // Elevate barrel
         float ver = UnityEngine.Input.GetAxis("Vertical");
-
-        // Rotate barrel
-        barrel.Rotate(Vector3.right, ver * Time.deltaTime * turnSensibility * -1);
+        float elevation = ver * Time.deltaTime * turnSensibility * -1;
+        UI.ElevateBarrelAim(elevation *-1);
+        barrel.Rotate(Vector3.right, elevation );
         Vector3 angle = barrel.localEulerAngles;
 
         // Adapt from -180-180 angles to 0-360
@@ -68,7 +70,7 @@ public class CannonController : MonoBehaviour
 
         if (UnityEngine.Input.GetMouseButtonDown(1))
         {
-            RemoveControl();
+              OnInteractHandler(false);
         }
 
         if(UnityEngine.Input.GetKeyDown(KeyCode.Alpha1))
@@ -79,16 +81,6 @@ public class CannonController : MonoBehaviour
         {
             currentProjectileIndex = 1;
         }
-    }
-
-    public void RemoveControl()
-    {
-        // Disable this script and cannon camera
-        // Activate player game object
-        this.enabled = false;
-        PlayerRef.SetActive(true);
-        cannonCamera.SetActive(false);
-        hud.SetActive(true);
     }
 
     public void Shoot()

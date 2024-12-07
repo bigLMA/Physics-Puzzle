@@ -13,6 +13,12 @@ public class MainUI : MonoBehaviour
     [SerializeField]
     private Crosshair crosshair;
 
+    [Header("Cannon")]
+    [SerializeField]
+    private RectTransform barrelHorizontalAim;
+    [SerializeField]
+    private float barrelAimElevationRange = 11f;
+
     private IDisplayable displayedObject = null;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -54,5 +60,12 @@ public class MainUI : MonoBehaviour
             // Draw crosshair as not locked at target
             crosshair.DrawLoose();
         }
+    }
+
+    public void ElevateBarrelAim(float elevation)
+    {
+        Vector3 pos = barrelHorizontalAim.transform.localPosition;
+        Vector3 clampedPos = new Vector3(pos.x, Mathf.Clamp(pos.y + elevation, -barrelAimElevationRange, barrelAimElevationRange), pos.z);
+        barrelHorizontalAim.localPosition = clampedPos;
     }
 }
