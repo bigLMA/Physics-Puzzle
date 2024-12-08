@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.Linq;
+using static UnityEngine.Rendering.BoolParameter;
 
 
 public class MainMenu : MonoBehaviour
@@ -18,16 +19,37 @@ public class MainMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
 
+        int idx = 0;
+
         foreach(var timer in textTimers)
         {
-            timer.text = "Best time: n/a";
+            string levelName = timer.name;
+            string displayTime = "";
+
+            if (idx< PlayerStatsManager.Instance.timeRecords.Count)
+            {
+                float total = PlayerStatsManager.Instance.timeRecords[idx];
+                float minutes = Mathf.Floor(total / 60);
+                float seconds = Mathf.Round(total - 60 * minutes);
+
+                //Format minutes and seconds
+                string minutesDisplay = minutes < 10f ? $"0{minutes}" : $"{minutes}";
+                string secondsDisplay = seconds < 10f ? $"0{seconds}" : $"{seconds}";
+                displayTime = minutesDisplay + ":"+ secondsDisplay;
+            }
+            else
+            {
+                displayTime = "n/a";
+            }
+
+            ++idx;
+
+            timer.text = $"Best time: {displayTime}";
         }
     }
 
     public void Exit()
     {
-        print("ALEGUS");
-
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
@@ -50,6 +72,7 @@ public class MainMenu : MonoBehaviour
             if(operation.progress>=0.9f)
             {
                 operation.allowSceneActivation=true;
+                PlayerStatsManager.Instance.TimeSinceNewScene = Time.unscaledTime;
             }
 
             yield return null;

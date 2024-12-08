@@ -13,7 +13,8 @@ public class LoadNextLevel : MonoBehaviour
         // Load next scene if player
         if(other.name =="Player")
         {
-            //SceneManager.LoadScene(sceneName);
+            //PlayerStatsManager.Instance.TryOverrideTimeData(SceneManager.GetActiveScene().name, Time.unscaledTime - PlayerStatsManager.Instance.TimeSinceNewScene);
+            PlayerStatsManager.Instance.TryOverrideTimeData(SceneManager.GetActiveScene().buildIndex-1, Time.unscaledTime - PlayerStatsManager.Instance.TimeSinceNewScene);
             StartCoroutine(nameof(LoadAsyncScene));
         }
     }
@@ -25,7 +26,11 @@ public class LoadNextLevel : MonoBehaviour
 
         while(!loadOperation.isDone)
         {
-            if(loadOperation.progress>=0.9f) loadOperation.allowSceneActivation=true;
+            if (loadOperation.progress >= 0.9f)
+            {
+                loadOperation.allowSceneActivation = true;
+                PlayerStatsManager.Instance.TimeSinceNewScene = Time.unscaledTime;
+            }
 
             yield return null;
         }
