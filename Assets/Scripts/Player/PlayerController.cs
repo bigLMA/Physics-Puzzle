@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         // Hide cursor
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
         // Get references to player components
