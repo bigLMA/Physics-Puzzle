@@ -15,7 +15,6 @@ public class ThrowProjectileInventory : MonoBehaviour
     private int projectileCount = 4;
 
     private GameObject[] projectilePooling;
-    private int currentPoolingIndex = 0;
 
     public bool HasProjectile { get; set; } = false;
 
@@ -31,18 +30,6 @@ public class ThrowProjectileInventory : MonoBehaviour
             projectilePooling[i].SetActive(false);
         }
     }
-
-    //public void ThrowProjectile()
-    //{
-    //    if (!HasProjectile || !canThrow) return;
-
-    //    var projectile = Instantiate(projectilePrefab, throwPoint.position, throwPoint.rotation);   
-    //    var projectileRb = projectile.GetComponent<Rigidbody>();
-    //    projectileRb.linearVelocity = throwPoint.forward.normalized * projectileVelocity;
-    //    canThrow = false;
-
-    //    StartCoroutine(nameof(IntervalCoroutine));
-    //}
 
     public void ThrowProjectile()
     {
