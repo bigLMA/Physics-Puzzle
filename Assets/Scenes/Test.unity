@@ -1813,7 +1813,7 @@ GameObject:
   - component: {fileID: 2064086569}
   m_Layer: 0
   m_Name: Ice Cube
-  m_TagString: Untagged
+  m_TagString: Ice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2019,6 +2019,10 @@ PrefabInstance:
     - target: {fileID: 3569591218206054130, guid: 42aa8b91ad459dc4a87db8b9821f116b, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8639294457378862594, guid: 42aa8b91ad459dc4a87db8b9821f116b, type: 3}
+      propertyPath: accelerationMultiplier
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 8645610778731635169, guid: 42aa8b91ad459dc4a87db8b9821f116b, type: 3}
       propertyPath: m_LocalPosition.x

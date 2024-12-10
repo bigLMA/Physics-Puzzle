@@ -50,6 +50,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     [Tooltip("Hom much distance from the camera to the grabbed object")]
     private Vector3 grabbedObjectOffset = new Vector3(0f, 0.5f, 1f);
+
+    [Header("Sliding")]
+    [Tooltip("Increases speed of the player when on ice")]
+    [SerializeField]
+    private float iceSpeedIncrease = 2f;
+
     public GrabbedObject GrabbedObject { get; private set; }
     //private Rigidbody grabbedBody;
 
@@ -59,6 +65,8 @@ public class PlayerController : MonoBehaviour
 
     public delegate void OnDisplayebleLook(IDisplayable target);
     public event OnDisplayebleLook DisplaybleLook;
+
+    private ForceMode movingForce = ForceMode.VelocityChange;
 
     /// <summary>
     /// If player is on ground or in air
@@ -105,6 +113,8 @@ public class PlayerController : MonoBehaviour
 
         // Handle grabbed object rotation
         RotateGrabbedObject();
+
+        print(playerRb.linearVelocity.magnitude);
     }
 
     private void RotateGrabbedObject()
@@ -200,7 +210,7 @@ public class PlayerController : MonoBehaviour
         velocityChange = new Vector3(velocityChange.x, 0f, velocityChange.z);
 
         //Vector3.ClampMagnitude(velocityChange, maxForce);
-        playerRb.AddForce(velocityChange, ForceMode.VelocityChange);
+        playerRb.AddForce(velocityChange, movingForce);
     }
 
     /// <summary>
@@ -343,6 +353,24 @@ public class PlayerController : MonoBehaviour
         else
         {
             DisplaybleLook(null);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag=="Ice")
+        {
+            movingForce = ForceMode.Acceleration;
+            moveSpeed += iceSpeedIncrease;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ice")
+        {
+            moveSpeed -= iceSpeedIncrease;
+            movingForce = ForceMode.VelocityChange;
         }
     }
 }
