@@ -2,15 +2,33 @@ using UnityEngine;
 
 public class EffectProjectile : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private GameObject surfacePrefab;
+    [SerializeField]
+    private float surfaceRadiusMin = 1.2f;
+    [SerializeField]
+    private float surfaceRadiusMax = 2.5f;
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        // TODO HARDCODED LAYER
+        if (collision.gameObject.layer != 6)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
+        // Get surface position
+        Vector3 pos = collision.GetContact(0).point /*+ new Vector3(0f, 0.01f)*/;
+
+        // Get random zone radiusn
+        float radius = Random.Range(surfaceRadiusMin, surfaceRadiusMax);
+
+        // Create surface
+        var surface = Instantiate(surfacePrefab, pos, Quaternion.Euler(90f, 0f, 0f));
+        surface.transform.localScale = new Vector3(radius, radius, 1f);
+
+        // Deactivate projectile
+        gameObject.SetActive(false);
     }
 }

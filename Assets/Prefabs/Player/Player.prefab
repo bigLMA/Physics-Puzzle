@@ -211,7 +211,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   grabbedObjectOffset: {x: 0, y: 0.25, z: 1.25}
-  iceSpeedIncrease: 9
+  iceSpeedIncrease: 25
 --- !u!1 &7038798882840266286
 GameObject:
   m_ObjectHideFlags: 0

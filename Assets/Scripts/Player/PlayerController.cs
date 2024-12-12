@@ -114,7 +114,7 @@ public class PlayerController : MonoBehaviour
         // Handle grabbed object rotation
         RotateGrabbedObject();
 
-        print(playerRb.linearVelocity.magnitude);
+       // print(playerRb.linearVelocity.magnitude);
     }
 
     private void RotateGrabbedObject()
@@ -362,6 +362,9 @@ public class PlayerController : MonoBehaviour
         {
             movingForce = ForceMode.Acceleration;
             moveSpeed += iceSpeedIncrease;
+
+            var surface = collision.gameObject.GetComponent<IceSurface>();
+            surface.OnDestroyHandler += FromIceToGround;
         }
     }
 
@@ -369,8 +372,16 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ice")
         {
-            moveSpeed -= iceSpeedIncrease;
-            movingForce = ForceMode.VelocityChange;
+            var surface = collision.gameObject.GetComponent<IceSurface>();
+            surface.OnDestroyHandler -= FromIceToGround;
+
+            FromIceToGround();
         }
+    }
+
+    private void FromIceToGround()
+    {
+        moveSpeed -= iceSpeedIncrease;
+        movingForce = ForceMode.VelocityChange;
     }
 }

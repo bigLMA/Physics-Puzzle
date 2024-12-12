@@ -149,3 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d68b0b04f669a194cba86ac1961f9411, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  surfacePrefab: {fileID: 6719883094987611124, guid: 350c2e5eb79373f46b76c1bcab0beb26, type: 3}
+  surfaceLifetime: 4.5
+  surfaceRadiusMin: 1.2
+  surfaceRadiusMax: 2.2
