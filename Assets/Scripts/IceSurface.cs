@@ -11,13 +11,22 @@ public class IceSurface : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(SurfaceCoroutine());
+        //StartCoroutine(SurfaceCoroutine());
+        Invoke(nameof(SurfaceDestroyed), surfaceLifetime);
+    }
+
+    private void SurfaceDestroyed()
+    {
+
+        OnDestroyHandler?.Invoke();
+        Destroy(gameObject);
     }
 
     private IEnumerator SurfaceCoroutine()
     {
         yield return new WaitForSeconds(surfaceLifetime);
 
+        var name = gameObject.name;
         OnDestroyHandler();
         Destroy(gameObject);
     }

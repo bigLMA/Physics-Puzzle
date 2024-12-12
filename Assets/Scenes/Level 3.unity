@@ -221,8 +221,8 @@ MonoBehaviour:
   throwPoint: {fileID: 1284918656}
   projectilePrefab: {fileID: 7374605501628002887, guid: 62680187217fa344dac3db661cc11827, type: 3}
   projectileVelocity: 22
-  throwInterval: 1.2
-  projectileCount: 4
+  throwInterval: 2.8
+  projectileCount: 8
 --- !u!1 &125934309
 GameObject:
   m_ObjectHideFlags: 0

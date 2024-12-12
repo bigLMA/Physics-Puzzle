@@ -33,7 +33,11 @@ public class ThrowProjectileInventory : MonoBehaviour
 
     public void ThrowProjectile()
     {
+        print("BEFORE CHECK");
+
         if (!HasProjectile || !canThrow) return;
+
+        print("CAN THROW");
 
         var projectile = GetPooledObject();
         projectile.SetActive(true);
