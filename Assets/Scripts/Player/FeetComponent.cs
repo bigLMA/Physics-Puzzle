@@ -7,6 +7,7 @@ public class FeetComponent : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // TODO HARDCODED LAYER
         if (other.gameObject.layer == 3) return;
 
         if (other.gameObject == player) return;

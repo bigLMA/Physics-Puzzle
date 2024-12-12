@@ -248,7 +248,7 @@ public class PlayerController : MonoBehaviour
         GrabbedObject.transform.rotation = Quaternion.identity;
 
         // Set layer of Grabbed object to grab layer
-        // TODO
+        // TODO HARDCODED LAYER
         GrabbedObject.gameObject.layer = 7;
     }
 
