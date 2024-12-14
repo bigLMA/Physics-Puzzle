@@ -11,6 +11,8 @@ public class EffectProjectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.name == "Player") return;
+
         // TODO HARDCODED LAYER
         if (collision.gameObject.layer != 6)
         {

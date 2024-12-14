@@ -68,6 +68,8 @@ public class PlayerController : MonoBehaviour
 
     private ForceMode movingForce = ForceMode.VelocityChange;
 
+    public bool ConstainedMovement { get; set; }
+
     /// <summary>
     /// If player is on ground or in air
     /// </summary>
@@ -114,7 +116,7 @@ public class PlayerController : MonoBehaviour
         // Handle grabbed object rotation
         RotateGrabbedObject();
 
-       // print(playerRb.linearVelocity.magnitude);
+        if (ConstainedMovement) playerRb.linearVelocity = Vector3.zero;
     }
 
     private void RotateGrabbedObject()
@@ -160,6 +162,8 @@ public class PlayerController : MonoBehaviour
     // Handles jump behaviour
     private void Jump()
     {
+        if (ConstainedMovement == true) return;
+
         // Get Player input
         if (input.GetJump())
         {
@@ -191,6 +195,8 @@ public class PlayerController : MonoBehaviour
     // Handles move behnaviour
     private void Move()
     {
+        if (ConstainedMovement == true) return;
+
         // Get player input
         Vector2 move = input.GetMove();
 
