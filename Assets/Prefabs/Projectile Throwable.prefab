@@ -152,3 +152,4 @@ MonoBehaviour:
   surfacePrefab: {fileID: 6719883094987611124, guid: 350c2e5eb79373f46b76c1bcab0beb26, type: 3}
   surfaceRadiusMin: 1.2
   surfaceRadiusMax: 2.2
+  iceParticle: {fileID: 5339309352540494314, guid: 5451847437da72e44812519ec4bbee67, type: 3}

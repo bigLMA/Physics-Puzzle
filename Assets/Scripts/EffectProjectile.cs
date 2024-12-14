@@ -8,10 +8,18 @@ public class EffectProjectile : MonoBehaviour
     private float surfaceRadiusMin = 1.2f;
     [SerializeField]
     private float surfaceRadiusMax = 2.5f;
+    [SerializeField]
+    private GameObject iceParticle;
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.name == "Player") return;
+
+        // Get surface position
+        Vector3 pos = collision.GetContact(0).point;
+
+        var particle =Instantiate(iceParticle, pos, Quaternion.identity);
+        Destroy(particle, 5f);
 
         // TODO HARDCODED LAYER
         if (collision.gameObject.layer != 6)
@@ -20,8 +28,7 @@ public class EffectProjectile : MonoBehaviour
             return;
         }
 
-        // Get surface position
-        Vector3 pos = collision.GetContact(0).point /*+ new Vector3(0f, 0.01f)*/;
+
 
         // Get random zone radiusn
         float radius = Random.Range(surfaceRadiusMin, surfaceRadiusMax);
