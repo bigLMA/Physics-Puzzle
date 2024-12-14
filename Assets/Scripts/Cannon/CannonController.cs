@@ -103,6 +103,10 @@ public class CannonController : MonoBehaviour
 
         // Play shot sound
         shotAudio.Play();
+
+        // Launch particle
+        var patricle = projectileSpawnPoint.GetComponent<ParticleSystem>();
+        patricle.Play();
     }
 
     public void StopShoot()
