@@ -30,9 +30,12 @@ public class CannonController : MonoBehaviour
     public delegate void OnInteract(bool interact);
     public event OnInteract OnInteractHandler;
 
+    private AudioSource shotAudio;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
+        shotAudio= GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -97,6 +100,9 @@ public class CannonController : MonoBehaviour
         // Launch projectile
         var projectileRb = projectile.GetComponent<Rigidbody>();
         projectileRb.linearVelocity = projectileSpawnPoint.forward * projectileSpeed;
+
+        // Play shot sound
+        shotAudio.Play();
     }
 
     public void StopShoot()
