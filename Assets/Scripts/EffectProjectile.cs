@@ -10,6 +10,8 @@ public class EffectProjectile : MonoBehaviour
     private float surfaceRadiusMax = 2.5f;
     [SerializeField]
     private GameObject iceParticle;
+    [SerializeField]
+    private string groundLayer;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -21,8 +23,9 @@ public class EffectProjectile : MonoBehaviour
         var particle =Instantiate(iceParticle, pos, Quaternion.identity);
         Destroy(particle, 5f);
 
-        // TODO HARDCODED LAYER
-        if (collision.gameObject.layer != 6)
+        int groundLayerNum = LayerMask.NameToLayer(groundLayer);
+
+        if (collision.gameObject.layer != groundLayerNum)
         {
             gameObject.SetActive(false);
             return;

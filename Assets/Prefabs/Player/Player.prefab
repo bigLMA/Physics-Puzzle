@@ -201,15 +201,10 @@ MonoBehaviour:
   lookSpeed: 12
   cam: {fileID: 556154656217743448}
   lookUpConstraint: 89
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 64
   interactRange: 1.9
   throwStrength: 45
   grabbedObjectRotation: 15
-  grabLayer:
-    serializedVersion: 2
-    m_Bits: 0
+  grabLayer: Hold layer
   grabbedObjectOffset: {x: 0, y: 0.25, z: 1.25}
   iceSpeedIncrease: 25
 --- !u!1 &7038798882840266286
@@ -372,3 +367,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 8639294457378862594}
+  triggerLayer: Trigger

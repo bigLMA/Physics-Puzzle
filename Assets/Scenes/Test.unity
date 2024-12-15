@@ -2077,6 +2077,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8639294457378862594, guid: 42aa8b91ad459dc4a87db8b9821f116b, type: 3}
+      propertyPath: grabLayer
+      value: Hold Layer
+      objectReference: {fileID: 0}
     - target: {fileID: 8645610778731635169, guid: 42aa8b91ad459dc4a87db8b9821f116b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

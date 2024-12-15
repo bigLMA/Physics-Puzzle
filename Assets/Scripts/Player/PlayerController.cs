@@ -28,8 +28,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     [Tooltip("X angle constraint for look. Both positive and negative")]
     private float lookUpConstraint = 89f;
-    [SerializeField]
-    private LayerMask groundMask;
+
     private float xLook = 0f;
 
     [Header("Interaction")]
@@ -46,7 +45,7 @@ public class PlayerController : MonoBehaviour
     private float grabbedObjectRotation = 15f;
     [SerializeField]
     [Tooltip("Layer to display grabbed objects when they stuck in static objects")]
-    private LayerMask grabLayer;
+    private string grabLayer;
     [SerializeField]
     [Tooltip("Hom much distance from the camera to the grabbed object")]
     private Vector3 grabbedObjectOffset = new Vector3(0f, 0.5f, 1f);
@@ -254,8 +253,7 @@ public class PlayerController : MonoBehaviour
         GrabbedObject.transform.rotation = Quaternion.identity;
 
         // Set layer of Grabbed object to grab layer
-        // TODO HARDCODED LAYER
-        GrabbedObject.gameObject.layer = 7;
+        GrabbedObject.gameObject.layer = LayerMask.NameToLayer(grabLayer);
     }
 
     /// <summary>

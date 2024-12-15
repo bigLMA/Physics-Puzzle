@@ -153,3 +153,4 @@ MonoBehaviour:
   surfaceRadiusMin: 1.2
   surfaceRadiusMax: 2.2
   iceParticle: {fileID: 5339309352540494314, guid: 5451847437da72e44812519ec4bbee67, type: 3}
+  groundLayer: Ground
